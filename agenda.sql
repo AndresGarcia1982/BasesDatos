@@ -29,13 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Evento` (
-  `id` int(10) NOT NULL,
-  `titulo` varchar(12) NOT NULL,
-  `fechaInicio` date NOT NULL,
-  `horaInicio` time NOT NULL,
-  `fechaFin` date DEFAULT NULL,
-  `horaFin` time DEFAULT NULL,
-  `id_usuario` int(5) NOT NULL
+  `Id` int(11) NOT NULL,
+  `IdUsuario` int(11) DEFAULT NULL,
+  `Titulo` varchar(20) NOT NULL,
+  `FechaInicio` date NOT NULL,
+  `HoraInicio` time DEFAULT NULL,
+  `FechaFinalizacion` date DEFAULT NULL,
+  `HoraFinalizacion` time DEFAULT NULL,
+  `DiaCompleto` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla para datos evento';
 
 -- --------------------------------------------------------
@@ -45,11 +46,11 @@ CREATE TABLE `Evento` (
 --
 
 CREATE TABLE `Usuario` (
-  `idUs` int(5) NOT NULL,
-  `nombreUs` varchar(50) NOT NULL,
-  `apellidoUs` varchar(50) NOT NULL,
-  `correoUs` varchar(45) NOT NULL,
-  `claveUs` varchar(45) NOT NULL
+  `Id` int(11) NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Apellido` date NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla datos usuario';
 
 --
@@ -60,24 +61,29 @@ CREATE TABLE `Usuario` (
 -- Indexes for table `Evento`
 --
 ALTER TABLE `Evento`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_usuario` (`id_usuario`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `fk_usuario` (`IdUsuario`);
 
 --
 -- Indexes for table `Usuario`
 --
 ALTER TABLE `Usuario`
-  ADD PRIMARY KEY (`idUs`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT de la tabla `evento`
+--
+ALTER TABLE `Evento`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `idUs` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -87,7 +93,7 @@ ALTER TABLE `Usuario`
 -- Constraints for table `Evento`
 --
 ALTER TABLE `Evento`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `Usuario` (`idUs`);
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`IdUsuario`) REFERENCES `Usuario` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

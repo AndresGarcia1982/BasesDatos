@@ -1,7 +1,7 @@
 <?php
 
-$UserName=$_POST['correoUs'];
-    $Password=$_POST['claveUs'];
+    $UserName=$_POST['username'];
+    $Password=$_POST['password'];
     include 'conexion_BD.php';
     IniciarSesion();
     function IniciarSesion(){
@@ -9,13 +9,13 @@ $UserName=$_POST['correoUs'];
        IniciarConexion();
        $IdUser=0;
        $Nombre="";
-       $Consulta="Select * from usuario where correoUs='".$GLOBALS['correoUs']."'";
+       $Consulta="Select * from usuario where Username='".$GLOBALS['UserName']."'";
        $Resultado= $GLOBALS['Conexion']->query($Consulta);
        if(mysqli_num_rows($Resultado)==0){
            $Retorno="Usuario o Contraseña incorrecta";
        }else{
        while ($fila = mysqli_fetch_array($Resultado)){
-            if(password_verify($GLOBALS['claveUs'],$fila['claveUs'])){
+            if(password_verify($GLOBALS['Password'],$fila['Password'])){
                $IdUser=$fila['Id'];
                $Nombre=$fila['Nombre'];
                setcookie('IdUser',$IdUser);

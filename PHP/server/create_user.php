@@ -7,10 +7,10 @@ include 'conexion_BD.php';
 
     function CrearUsuarios($Nombre,$Apellido,$UserName,$Password){
     IniciarConexion();
-    $Consulta="Select * from usuario where correoUs='".$UserName."'";
+    $Consulta="Select * from usuario where Username='".$UserName."'";
     $Resultado= mysqli_num_rows($GLOBALS['Conexion']->query($Consulta));
     if($Resultado==0){
-        $Consulta = "INSERT INTO usuario (nombreUs, apellidoUs, claveUs, correoUs)
+        $Consulta = "INSERT INTO usuario (Nombre, Apellido, UserName, Password)
         VALUES ('".$Nombre."', '".$Apellido."', '".$UserName."','".password_hash($Password, PASSWORD_BCRYPT)."')";
 
         if ($GLOBALS['Conexion']->query($Consulta) === TRUE) {
