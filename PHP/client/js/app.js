@@ -8,7 +8,7 @@ class EventsManager {
 
 
     obtenerDataInicial() {
-        let url = './server/getEvents.php'
+        let url = '../server/getEvents.php'
         $.ajax({
           url: url,
           dataType: "json",

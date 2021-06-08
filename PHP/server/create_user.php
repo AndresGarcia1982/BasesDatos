@@ -5,13 +5,13 @@ include 'conexion_BD.php';
     CrearUsuarios("Carlos","Aguirre","12345","carlos1245@yahoo.com");
     CrearUsuarios("Santiago","Anago","password","sanana987@hotmail.com");
 
-    function CrearUsuarios($Nombre,$Apellido,$Password,$UserName){
+    function CrearUsuarios($Nombre,$Apellido,$UserName,$Password){
     IniciarConexion();
     $Consulta="Select * from usuario where correoUs='".$UserName."'";
     $Resultado= mysqli_num_rows($GLOBALS['Conexion']->query($Consulta));
     if($Resultado==0){
         $Consulta = "INSERT INTO usuario (nombreUs, apellidoUs, claveUs, correoUs)
-        VALUES ('".$Nombre."', '".$Apellido"', '".password_hash($Password, PASSWORD_BCRYPT)."', '".$UserName."' )";
+        VALUES ('".$Nombre."', '".$Apellido."', '".$UserName."','".password_hash($Password, PASSWORD_BCRYPT)."')";
 
         if ($GLOBALS['Conexion']->query($Consulta) === TRUE) {
             echo "Nuevo registro ingresado";

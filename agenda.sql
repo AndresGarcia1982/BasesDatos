@@ -47,10 +47,10 @@ CREATE TABLE `Evento` (
 CREATE TABLE `Usuario` (
   `idUs` int(5) NOT NULL,
   `nombreUs` varchar(50) NOT NULL,
-  `apellidoUS` varchar(50) NOT NULL,
-  `claveUs` varchar(45) NOT NULL,
-  `correoUs` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Taba datos usuario';
+  `apellidoUs` varchar(50) NOT NULL,
+  `correoUs` varchar(45) NOT NULL,
+  `claveUs` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla datos usuario';
 
 --
 -- Indexes for dumped tables
