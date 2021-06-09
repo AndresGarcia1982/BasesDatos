@@ -48,7 +48,7 @@ CREATE TABLE `Evento` (
 CREATE TABLE `Usuario` (
   `Id` int(11) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
-  `Apellido` date NOT NULL,
+  `FechaNacimiento` date NOT NULL,
   `Username` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla datos usuario';
