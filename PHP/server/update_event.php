@@ -1,25 +1,24 @@
 <?php
-include 'conexion_BD.php';
- $ID=$_POST['id'];
- $FechaInicio=$_POST['start_date'];
- $FechaFinal=$_POST['end_date'];
- $HoraFinal=$_POST['end_hour'];
- $HoraInicial=$_POST['start_hour'];
+require('bdconector.php');
 
- CrearEvento();
+$datos = array(
+'FechaInicio' => $_POST['start_date'],
+'HoraInicio' => $_POST['start_hour'],
+'FechaFinalizacion' => $_POST['end_date'],
+'HoraFinalizacion' => $_POST['end_hour']);
 
- function CrearEvento(){
-    IniciarConexion();
-    $Consulta = "update evento set FechaInicio='".$GLOBALS['FechaInicio']."', HoraInicio='".$GLOBALS['HoraInicial']."', FechaFinalizacion='".$GLOBALS['FechaFinal']."', HoraFinalizacion='".$GLOBALS['HoraFinal']."'
-    where Id=".$GLOBALS['ID'];
+$con = new ConectorBD('localhost','agenda','12345');
+$respuesta['msg'] = $con->iniciarConexion('agenda');
 
-    if ($GLOBALS['Conexion']->query($Consulta) === TRUE) {
-        echo json_encode(array("msg"=>"OK"));
-    } else {
-        echo json_encode(array("msg"=>"Error Al registrar el evento"));
-    }
-    DesactivarConexion();
- }
+if ($respuesta['msg'] == 'OK') {
+  $condicion = 'id="'.$_POST['id'].'"';
+  if($con->actualizarRegistro('evento', $datos, $condicion)){
+      $respuesta['estado'] = "El evento se ha actualizado exitosamente";
+  }else {
+      $respuesta['estado'] = "Hubo un error y los datos no se han actualizado";
+  }
+}
+echo json_encode($respuesta);
+$con->cerrarConexion();
 
-
- ?>
+?>

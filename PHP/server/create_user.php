@@ -1,27 +1,26 @@
 <?php
 
-include 'conexion_BD.php';
-    CrearUsuarios("Leandro","Allen","qwert","leandroallen@gmail.com");
-    CrearUsuarios("Carlos","Aguirre","12345","carlos1245@yahoo.com");
-    CrearUsuarios("Santiago","Anago","password","sanana987@hotmail.com");
+require('bdconector.php');
 
-    function CrearUsuarios($Nombre,$Apellido,$UserName,$Password){
-    IniciarConexion();
-    $Consulta="Select * from usuario where Username='".$UserName."'";
-    $Resultado= mysqli_num_rows($GLOBALS['Conexion']->query($Consulta));
-    if($Resultado==0){
-        $Consulta = "INSERT INTO usuario (Nombre, Apellido, UserName, Password)
-        VALUES ('".$Nombre."', '".$Apellido."', '".$UserName."','".password_hash($Password, PASSWORD_BCRYPT)."')";
+$datos = array(
+  'Nombre' => 'Andres Garcia',
+  'FechaNacimiento' => '1982-03-02',
+  'Username' => 'andres@gmail.com',
+  'Password' => password_hash("123", PASSWORD_DEFAULT));
 
-        if ($GLOBALS['Conexion']->query($Consulta) === TRUE) {
-            echo "Nuevo registro ingresado";
-        } else {
-            echo "Error: " . $sql . "<br>" . $GLOBALS['Conexion']->error;
-        }
-    }
-    DesactivarConexion();
-    }
+$con = new ConectorBD('localhost','agenda','12345');
+$respuesta = $con->iniciarConexion('agenda');
 
+if ($respuesta == 'OK') {
+  if($con->insertarRegistro('usuario', $datos)){
+      $respuesta = "exito en la insercion";
+  }else {
+      $respuesta = "Hubo un error y los datos no han sido cargados";
+  }
+}else {
+  $respuesta = "No se pudo conectar a la base de datos";
+}
+echo json_encode($respuesta);
+$con->cerrarConexion();
 
-
- ?>
+?>
