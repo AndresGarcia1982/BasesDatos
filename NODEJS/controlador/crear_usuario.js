@@ -10,31 +10,30 @@ const Router = require('express').Router(),
         return res.status(500).send({message: 'Error al intentar obtener los usuarios. (status:500)'})
       }else{
         if (usuarios.length <= 0) {
-			//Insertar un nuevo Usuario de sistema 
+			//Insertar un nuevo Usuario de sistema
 			let nuevoUsuario1 = new Usuario()
-			nuevoUsuario1.nombre = 'Sergio Regalado Alessi'
-			nuevoUsuario1.email = 'serdigital@live.com.ar'
-			nuevoUsuario1.clave = '123456'
+			nuevoUsuario1.nombre = 'Andres Garcia'
+			nuevoUsuario1.email = 'andres@gmial.com'
+			nuevoUsuario1.clave = '123'
 			nuevoUsuario1.save((err, usuario1) => {
 			  	if (err) return res.status(500).send({message: 'Error al intentar insertar el usuario1. (status:500)'})
 			})
 
-			//Insertar un nuevo Usuario de sistema 
+			//Insertar un nuevo Usuario de sistema
 			let nuevoUsuario2 = new Usuario()
-			nuevoUsuario2.nombre = 'Luis Hector Rodriguez'
-			nuevoUsuario2.email = 'luis2018@gamil.com'
-			nuevoUsuario2.clave = 'luis2018'
+			nuevoUsuario2.nombre = 'Lucia Pena'
+			nuevoUsuario2.email = 'luci@gamil.com'
+			nuevoUsuario2.clave = '123'
 			nuevoUsuario2.save((err, usuario2) => {
 			  	if (err) return res.status(500).send({message: 'Error al intentar insertar el usuario2. (status:500)'})
-			})			
+			})
         }else{
           return res.json(usuarios)
-        } 
-      } 
+        }
+      }
     })
   })
 
 
 //Exportar el modulo
 module.exports = Router
-
