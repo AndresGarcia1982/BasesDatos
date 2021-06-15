@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Evento` (
   `Id` int(11) NOT NULL,
-  `IdUsuario` int(11) DEFAULT NULL,
   `Titulo` varchar(20) NOT NULL,
   `FechaInicio` date NOT NULL,
   `HoraInicio` time DEFAULT NULL,
   `FechaFinalizacion` date DEFAULT NULL,
   `HoraFinalizacion` time DEFAULT NULL,
-  `DiaCompleto` tinyint(1) NOT NULL
+  `DiaCompleto` tinyint(1) NOT NULL,
+  `IdUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla para datos evento';
 
 -- --------------------------------------------------------
